@@ -19,7 +19,7 @@ function example() {
   // I can access outside and inside here
 }  
 // I can only access outside here  
-// I can access inside
+// I can't access inside
 </pre>
 
 
