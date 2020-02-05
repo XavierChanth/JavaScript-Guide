@@ -111,3 +111,7 @@ new:
 ## Functions
 
 Also an Object but will continue in next Document...
+
+## Loops
+
+//Todo
