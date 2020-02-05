@@ -70,30 +70,6 @@ Examples:
 - Dictionaries
 - Classes
 
-#### Dictionary
-A Dictionary is a key value pair.  
-
-##### Key
-- Must be a unique number or string
-- Strings do not need quotation marks in JavaScript
-
-##### Values
-- Don't have to be unique
-- Can be any type of data
-
-Example:
-<pre>
-const dictionary = {
-  key: 12,
-  anotherKey: [1, 2, 3, 4]
-};
-
-console.log(dictionary.key)
-
-// Output
-// 12
-</pre>
-
 ### Implicit Types
 
 #### Falsy vs Truthy
