@@ -68,21 +68,15 @@ In most coding languages, code only runs synchronously, meaning that each line o
 >i.e. Line 1 runs, then line 2, then line 3...
 
 <pre>
-const f1 = () => {
-  console.log('ONE')
-}
-
-const f2 = () => {
-  console.log('TWO')
-}
-
-f1();
-f2();
+console.log('ONE')
+console.log('TWO')
 
 // Output:
 // ONE
 // TWO
 </pre>
+
+### Promises
 
 JavaScript code can also be executed asynchronously using functions. If you call an async function, the async function will run, but the code will continue without waiting for the function to finish.
 
@@ -94,8 +88,6 @@ function delay(seconds) {
 }
 
 console.log(delay(1));
-delay(1).then(result => console.log(result));
-
 
 // Output: 
 // Promise { <pending> }
@@ -105,9 +97,14 @@ delay(1).then(result => console.log(result));
 
 If an asynchronous piece of code needs to return something, but it doesn't know what to return yet, it will return a Promise.
 
-### Promises
+We cannot use const with a promise, since it initially returns a promise object.  
+If we were to use a const, then the object would never resolve since it would forever be stuck as a promise object.
+
+#### Promise Summary
 
 A Promise is literally a promise to return actual data later. 
+
+Don't use const, use let.
 
 There are three ways to handle Promises:
 - Callback Functions
@@ -119,12 +116,27 @@ There are three ways to handle Promises:
 Callback functions pass a function as a parameter which can then be called after the result is evaluated. The result will be passed as an argument to the function.
 
 <pre>
-  delay(1).then((result) => {
-    console.log('This is when it actually finished!');
-  })
+const f1 = () => {
+  console.log('Callback!');
+}
+
+const f2 = (callback) => {
+  console.log('Before callback');
+  callback();
+  console.log('After callback');
+}
+
+f2(f1);
+
+// Output:
+// Before callback
+// Callback!
+// After callback
 </pre>
 
-As you can see we passed an arrow function to .then() as an argument. This is a callback function. There are many more use cases for callback functions.
+As you can see we pass f1 as the callback for function f2.  
+The callback can be run at any point inside of f2.  
+Callbacks are commonly used to run some code after a function does what it needs to do.
 
 For example, many of the array functions use callbacks:
 - find
@@ -171,11 +183,25 @@ Let's say we have a function to get Users from a database called getUsers().
 Of course we have to wait for the database to return the data to us...
 <pre>
 const example = async() => {
-  let users = await getUsers();
-  // do something with users...
+  try {
+    let users = await getUsers();
+    // do something with users...
+    console.log(users[0].name)
+  } catch(error) {
+    // do something with the error
+    console.log('Yeah, our database broke...')
+  }
 }
-</pre>
 
-We cannot use const with the await keyword, since it initially returns a promise object.  
-If we were to use a const, then the object would never resolve since it would forever be stuck as a promise object.
+// Alternatively to try/catch (as long as your database returns null/undefined/false if theres an error)
+const example = async() => {
+  let users = await getUsers();
+  if(!users) {
+    // handle error
+  } else {
+    // do something with users
+  }
+}
+
+</pre>
 
