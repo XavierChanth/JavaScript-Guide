@@ -49,3 +49,11 @@ try {
   // the finally part is not mandatory but will always run after the try/catch regardless of whether it threw an error
 }
 </pre>
+
+## Loops
+// todo
+### For
+
+### While
+
+### Do while
