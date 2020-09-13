@@ -54,7 +54,7 @@ But x was set to 1 in function a!
 
 ## Variable Types
 
-### Basic Types
+### Basic Types (Primitive)
 - boolean - true or false
 - number - int, float, double, etc.
 - string - an array of characters
